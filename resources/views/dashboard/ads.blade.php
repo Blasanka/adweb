@@ -9,10 +9,10 @@
                     Dashboard
                     <ul class="nav nav-tabs"  id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="ads-tab" data-toggle="tab" href="{{route('dashboard.ads')}}" role="tab" aria-controls="ads" aria-selected="true">Ads<span class="badge">23</span></a>
+                            <a class="nav-link active" href="{{route('dashboard.ads')}}">Ads<span class="badge">23</span></a> <!--id="ads-tab" data-toggle="tab"  role="tab" aria-controls="ads" aria-selected="true"-->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="users-tab" data-toggle="tab" href="{{route('dashboard.users')}}" role="tab" aria-controls="users" aria-selected="true">Users<span class="badge">3</span></a>
+                            <a class="nav-link" href="{{route('dashboard.users')}}">Users<span class="badge">3</span></a><!-- id="users-tab" data-toggle="tab"  role="tab" aria-controls="users" aria-selected="true"-->
                         </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>

@@ -1,5 +1,5 @@
 
-<div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+{{-- <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab"> --}}
     <ul class="list-group">
         @foreach ($users as $user)
             <li class="list-group-item">
@@ -8,7 +8,7 @@
                     <p>{{ $user['email'] }}</p>
                 </a>
                 
-                <div class="collapse" id="a{{$user['email']}}">
+                <div class="collapse" id="a{{$user['username']}}">
                     <div class="item-footer">
                         <span>Manage this user: &nbsp;</span>
                         <span class="edit-item">
@@ -17,16 +17,16 @@
                         <span class="delete-item">
                             DELETE  <i class="fas fa-trash-alt"></i>
                         </span>
-                        <span class="edit-item">
-                            DISABLE  <i class="fas fa-edit"></i>
+                        <span class="enable-disable">
+                            DISABLE 
                         </span>
                     </div>
                 </div>
-                <a data-toggle="collapse" href="#a{{$user['email']}}" role="button" aria-expanded="false" aria-controls="a{{$user['email']}}">
+                <a data-toggle="collapse" href="#a{{$user['username']}}" role="button" aria-expanded="false" aria-controls="a{{$user['username']}}">
+                    <span class="caret">Manage</span> <i class="fas fa-external-link-square-alt"></i>
                     <span class="mr-3"></span>
-                    <span class="">Manage</span>
                 </a>
             </li>
         @endforeach
     </ul>
-</div>
+{{-- </div> --}}

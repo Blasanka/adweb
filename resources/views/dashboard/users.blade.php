@@ -9,7 +9,7 @@
                     Dashboard
                     <ul class="nav nav-tabs"  id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="ads-tab" data-toggle="tab" href="{{route('dashboard.ads')}}" role="tab" aria-controls="ads" aria-selected="true">Ads<span class="badge">23</span></a>
+                            <a class="nav-link" href="{{route('dashboard.ads')}}">Ads<span class="badge">23</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" id="users-tab" data-toggle="tab" href="{{route('dashboard.users')}}" role="tab" aria-controls="users" aria-selected="false">Users<span class="badge">3</span></a>
@@ -34,7 +34,7 @@
                         @include('partials.users-tab')
                     @endif
                 </div>
-                <div class="card-footer">{{ '77 Ads' }}</div>
+                <div class="card-footer">{{ '22 Users' }}</div>
             </div>
         </div>
     </div>

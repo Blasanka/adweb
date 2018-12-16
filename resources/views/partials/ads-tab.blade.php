@@ -1,5 +1,5 @@
 
-<div class="tab-pane fade show active" id="ads" role="tabpanel" aria-labelledby="ads-tab">
+{{-- <div class="tab-pane fade show active" id="ads" role="tabpanel" aria-labelledby="ads-tab"> --}}
     <ul class="list-group">
         @foreach ($ads as $ad)
             <li class="list-group-item">
@@ -23,10 +23,10 @@
                     </div>
                 </div>
                 <a data-toggle="collapse" href="#a{{$ad['contact']}}" role="button" aria-expanded="false" aria-controls="a{{$ad['contact']}}">
+                    <span class="caret">Manage</span>
                     <span class="mr-3"></span>
-                    <span class="">Manage</span>
                 </a>
             </li>
         @endforeach
     </ul>
-</div>
+{{-- </div> --}}
