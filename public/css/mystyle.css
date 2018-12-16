@@ -1,0 +1,46 @@
+a:hover,
+a:focus {
+    color: rgb(6, 15, 65);
+}
+
+.card-link {
+    color: #222;
+}
+
+.card-link:hover {
+    color: #555;
+}
+
+.edit-item {
+    margin-right: 20px;
+    color: #060;
+}
+
+.delete-item {
+    color: #600;
+}
+
+.disable-enable {
+    margin-right: 20px;
+    color: red;
+}
+
+/* .fa-compress-alt {
+    transform: rotate(40deg);
+    -webkit-transform: rotate(40deg);
+    transition: .3s transform ease-in-out;
+}
+  
+.fa-compress-alt {
+    transform: rotate(-140deg);
+    -webkit-transform: rotate(-140deg);
+    transition: .3s transform ease-in-out;
+} */
+
+.users-section {
+    display: none;
+}
+
+.ads-section {
+    display: none;
+}

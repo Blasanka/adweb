@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('firebase','FirebaseController@index');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+   // Dashboard
+   Route::get('/', [
+      'uses' => 'HomeController@index',
+      'as' => 'home'
+  ]);
+   Route::get('/ads', 'HomeController@getAds')->name('ads');
+   Route::get('/users', 'HomeController@getUsers')->name('users');
+});
