@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
@@ -20,12 +18,12 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/adapp-df2ae-bff1ac7f17ad.json');
+
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/add-app-9ae19-3c75e31c2721.json');
         $firebase = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        ->withDatabaseUri('https://adapp-df2ae.firebaseio.com/')
-        ->create();
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://add-app-9ae19.firebaseio.com/')
+            ->create();
 
         $this->database = $firebase->getDatabase();
     }
@@ -43,7 +41,7 @@ class HomeController extends Controller
     public function getAds()
     {
         $ads = $this->database
-        ->getReference('add-app/ad')->getSnapshot()->getvalue();
+            ->getReference('add-app/ad')->getSnapshot()->getvalue();
         // echo '<pre>';
         // print_r($newPost->getvalue());
         return view('dashboard.ads', ['ads' => $ads]);
@@ -52,7 +50,7 @@ class HomeController extends Controller
     public function getUsers()
     {
         $users = $this->database
-        ->getReference('add-app/users')->getSnapshot()->getvalue();
+            ->getReference('add-app/users')->getSnapshot()->getvalue();
 
         return view('dashboard.users', ['users' => $users]);
     }
