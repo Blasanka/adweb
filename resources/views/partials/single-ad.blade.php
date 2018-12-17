@@ -10,7 +10,7 @@
                     <div class="card-header">
                         {{ $a['title'] }}
                     </div>
-                    <div class="row">
+                    <div class="row ad-image-row">
                         @foreach ($a['imageUrl'] as $img)
                             <div class="col-md-2">
                                 <div class="card">
@@ -36,6 +36,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="card-footer">
+                    <a class="btn btn-info" href="{{ url()->previous() }}">Go Back</a>
+                </div>
             </div>
         </div>
     </div>

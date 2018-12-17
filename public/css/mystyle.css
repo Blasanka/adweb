@@ -30,7 +30,7 @@ a:focus {
     -webkit-transform: rotate(40deg);
     transition: .3s transform ease-in-out;
 }
-  
+
 .fa-compress-alt {
     transform: rotate(-140deg);
     -webkit-transform: rotate(-140deg);
@@ -43,4 +43,8 @@ a:focus {
 
 .ads-section {
     display: none;
+}
+
+.ad-image-row {
+    padding: 20px;
 }
