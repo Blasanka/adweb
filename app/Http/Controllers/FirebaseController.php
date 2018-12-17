@@ -2,51 +2,58 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
 class FirebaseController extends Controller
 {
+    private $serviceAccount;
+    private $firebase;
+    private $database;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/add-app-9ae19-3c75e31c2721.json');
+        $this->firebase = (new Factory)
+            ->withServiceAccount($this->serviceAccount)
+            ->withDatabaseUri('https://add-app-9ae19.firebaseio.com/')
+            ->create();
+
+        $this->database = $this->firebase->getDatabase();
+    }
+
     public function index()
     {
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/adapp-df2ae-bff1ac7f17ad.json');
-        $firebase = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        ->withDatabaseUri('https://adapp-df2ae.firebaseio.com/')
-        ->create();
-
-        $database = $firebase->getDatabase();
-
-        $ads = $database
-        ->getReference('add-app/ad')->getSnapshot()->getvalue();
+        $ads = $this->database
+            ->getReference('add-app/ad')->getSnapshot()->getvalue();
         // echo '<pre>';
         // print_r($newPost->getvalue());
         return view('welcome', ['ads' => $ads]);
     }
 
+    public function showAd($title)
+    {
+        $ad = $this->database
+            ->getReference('add-app/ad')->orderByChild('title')->equalTo($title)->getSnapshot()->getvalue();
+        // echo '<pre>';
+        // print_r($newPost->getvalue());
+        return view('partials.single-ad', ['ad' => $ad]);
+    }
 
-    public function save() {
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/adapp-df2ae-bff1ac7f17ad.json');
-        $firebase = (new Factory)
-        ->withServiceAccount($serviceAccount)
-        ->withDatabaseUri('https://adapp-df2ae.firebaseio.com/')
-        ->create();
-
-        $database = $firebase->getDatabase();
-
-        $newPost = $database
-        ->getReference('addapp/posts')
-        ->push([
-        'title' => 'Laravel FireBase Tutorial' ,
-        'category' => 'Laravel'
-        ]);
+    public function save()
+    {
+        $newPost = $this->database
+            ->getReference('add-app/ad')
+            ->push([
+                'title' => 'Laravel FireBase Tutorial',
+                'category' => 'Laravel',
+            ]);
         echo '<pre>';
         print_r($newPost->getvalue());
     }
