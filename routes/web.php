@@ -15,6 +15,11 @@ Route::get('/', [
     'as' => 'home',
 ]);
 
+Route::get('log', [
+    'uses' => 'FirebaseAuthController@index',
+    'as' => 'log'
+]);
+
 Route::get('ads/{title}', [
     'uses' => 'FirebaseController@showAd',
     'as' => 'ads.show',
@@ -22,10 +27,15 @@ Route::get('ads/{title}', [
 
 Auth::routes();
 
+Route::post('login', 'FirebaseAuthController@login');
+Route::post('logout', 'FirebaseAuthController@logout')->name('logout');
+
 Route::get('/dashboard', [
     'uses' => 'HomeController@index',
     'as' => 'dashboard',
 ]);
+
+
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     // Dashboard
     Route::get('/ads', 'HomeController@getAds')->name('ads');
