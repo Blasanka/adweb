@@ -24,7 +24,8 @@
                         </div>
                     @endif
                     @auth
-                        {{ Auth::user()->name }} &#x1F63C;
+                        {{-- {{ Auth::user()->name }} &#x1F63C; --}}
+                        {{Session::get('user')}}
                     @endauth 
                 </div>
                 <div class="card-footer">Coming soon</div>
