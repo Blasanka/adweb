@@ -40,7 +40,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('/ads', 'HomeController@getAds')->name('ads');
     Route::get('/users', 'HomeController@getUsers')->name('users');
 
-    Route::get('ads/{title}', [
+    Route::get('ad/{title}', [
         'uses' => 'FirebaseController@showAd',
         'as' => 'ad.show',
     ]);
@@ -51,4 +51,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     ]);
 
     Route::get('/users/userid/{uid}', 'FirebaseController@disableUser')->name('users.userid');
+    Route::get('/users/delete/{uid}', 'FirebaseController@deleteUser')->name('users.delete');
+
+    Route::get('/ads/{title}', 'FirebaseController@disableAd')->name('ads.title');
 });

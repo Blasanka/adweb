@@ -4,7 +4,12 @@
         @foreach ($ads as $ad)
             <li class="list-group-item">
                 <a href="{{ route('dashboard.ad.show', ['ad' => $ad['title']]) }}" class="card-link">
-                    <h4>{{ $ad['title'] }}</h4>
+                    <h4 style="display: inline;">{{ $ad['title'] }}</h4>
+                    @if (!empty($ad['disabled']))
+                        @if ($ad['disabled'])
+                            &nbsp;<span style="color: red;"><i class="fas fa-ban"></i> DISABLED</span>
+                        @endif
+                    @endif
                     <p>{{ $ad['description'] }}</p>
                 </a>
 

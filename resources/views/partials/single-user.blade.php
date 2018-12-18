@@ -25,7 +25,7 @@
                                     <a class="nav-link disabled" href="{{ route('dashboard.users.userid', ['uid' => $memberMetadata->uid]) }}"><i class="fas fa-ban"></i> DISABLE</a>
                                 @endif
                             @endif
-                            <a class="nav-link" href="{{route('dashboard.users')}}"><i class="fas fa-trash-alt"></i> DELETE</a>
+                            <a class="nav-link" href="{{route('dashboard.users.delete', ['uid' => $memberMetadata->uid])}}"><i class="fas fa-trash-alt"></i> DELETE</a>
                         </div>
                     </div>
                 </div>

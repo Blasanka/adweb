@@ -81,8 +81,22 @@ class FirebaseController extends Controller
 
     public function disableAd($title)
     {
-        $ad = $this->database->getReference('add-app/users')->orderByChild('email')
-            ->equalTo($email)->getSnapshot()->getvalue();
+        $adDb = $this->database->getReference('add-app/ad')->orderByChild('title')
+            ->equalTo($title)->getSnapshot()->getValue();
+        // dd($adDb);
+        $key = array_keys($adDb);
+        $values = end($adDb);
+
+        if (!empty($values['disabled'])) {
+            if ($values['disabled']) {
+                $this->database->getReference('add-app/ad/' . $key[0] . '/disabled')->set('false');
+            } elseif (!$values['disabled']) {
+                $this->database->getReference('add-app/ad/' . $key[0] . '/disabled')->set('true');
+            }
+        } else {
+            $this->database->getReference('add-app/ad/' . $key[0] . '/disabled')->set('true');
+        }
+        return redirect()->back();
     }
 
     public function disableUser($memberKey)
@@ -99,15 +113,22 @@ class FirebaseController extends Controller
         return redirect()->back();
     }
 
-    public function save()
+    public function deleteUser($memberKey)
     {
-        $newPost = $this->database
-            ->getReference('add-app/ad')
-            ->push([
-                'title' => 'Laravel FireBase Tutorial',
-                'category' => 'Laravel',
-            ]);
-        echo '<pre>';
-        print_r($newPost->getvalue());
+        $userDb = $this->database->getReference('add-app/users/' . $memberKey)->remove();
+        $memberMetadata = $this->auth->deleteUser($memberKey);
+        return redirect()->route('dashboard.users');
     }
+
+    // public function save()
+    // {
+    //     $newPost = $this->database
+    //         ->getReference('add-app/ad')
+    //         ->push([
+    //             'title' => 'Laravel FireBase Tutorial',
+    //             'category' => 'Laravel',
+    //         ]);
+    //     echo '<pre>';
+    //     print_r($newPost->getvalue());
+    // }
 }

@@ -8,7 +8,23 @@
             <div class="card">
                 @foreach ($ad as $a)
                     <div class="card-header">
-                        {{ $a['title'] }}
+                        <div class="row">
+                            <div class="col-md-9">
+                                {{ $a['title'] }}
+                            </div>
+                            <div class="col-md-3 manage-user">
+                                @if (!empty($a['disabled']))
+                                    @if (!$a['disabled'])
+                                        <a class="nav-link enabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-toggle-on"></i> DISABLE</a>
+                                    @else
+                                        <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> ENABLE</a>
+                                    @endif
+                                @elseif (empty($a['disabled']))
+                                    <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> DISABLE</a>
+                                @endif
+                                <a class="nav-link" href="{{route('dashboard.users')}}"><i class="fas fa-trash-alt"></i> DELETE</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="row ad-image-row">
                         @foreach ($a['imageUrl'] as $img)
