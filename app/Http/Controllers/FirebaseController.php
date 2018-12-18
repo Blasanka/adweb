@@ -57,14 +57,17 @@ class FirebaseController extends Controller
         foreach ($member as $key => $val) {
             $memberKey = $key;
         }
+
         if (!empty($memberKey)) {
             $memberMetadata = $this->auth->getUser($memberKey);
 
             foreach ($memberMetadata->metadata as $key => $meta) {
-                $dateTime = new \DateTime();
-                $date = $dateTime->setTimestamp($meta->getTimestamp());
-                $result = $date->format('Y-m-d H:i:s');
-                $dates[$key] = $result;
+                if (!empty($meta)) {
+                    $dateTime = new \DateTime();
+                    $date = $dateTime->setTimestamp($meta->getTimestamp());
+                    $result = $date->format('Y-m-d H:i:s');
+                    $dates[$key] = $result;
+                }
             }
         } else {
             $memberMetadata = '';
@@ -118,6 +121,12 @@ class FirebaseController extends Controller
         $userDb = $this->database->getReference('add-app/users/' . $memberKey)->remove();
         $memberMetadata = $this->auth->deleteUser($memberKey);
         return redirect()->route('dashboard.users');
+    }
+
+    public function deleteAd($title)
+    {
+        $this->database->getReference('add-app/ad/' . $title)->remove();
+        return redirect()->route('dashboard.ads');
     }
 
     // public function save()

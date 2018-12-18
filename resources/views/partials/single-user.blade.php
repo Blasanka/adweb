@@ -24,8 +24,8 @@
                                 @else
                                     <a class="nav-link disabled" href="{{ route('dashboard.users.userid', ['uid' => $memberMetadata->uid]) }}"><i class="fas fa-ban"></i> DISABLE</a>
                                 @endif
+                                <a class="nav-link" href="{{route('dashboard.users.delete', ['uid' => $memberMetadata->uid])}}"><i class="fas fa-trash-alt"></i> DELETE</a>
                             @endif
-                            <a class="nav-link" href="{{route('dashboard.users.delete', ['uid' => $memberMetadata->uid])}}"><i class="fas fa-trash-alt"></i> DELETE</a>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,10 @@
                 </div>
                 <div class="card-footer">
                     <a class="user-detais btn btn-light" href="{{ url()->previous() }}"><i class="fas fa-arrow-left"></i> Go Back</a>
-                    <span class="user-details">User registered at: {{ $dates['createdAt'] }}</span>
-                    <span class="user-details">User last logged in at: {{ $dates['lastLoginAt'] }}</span>
+                    @if (!empty($dates))
+                        <span class="user-details">User registered at: {{ $dates['createdAt'] }}</span>
+                        <span class="user-details">User last logged in at: {{ $dates['lastLoginAt'] }}</span>
+                    @endif
                 </div>
             </div>
         </div>

@@ -54,4 +54,6 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('/users/delete/{uid}', 'FirebaseController@deleteUser')->name('users.delete');
 
     Route::get('/ads/{title}', 'FirebaseController@disableAd')->name('ads.title');
+    Route::get('/ads/delete/{title}', 'FirebaseController@deleteAd')->name('ads.delete');
+
 });

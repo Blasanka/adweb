@@ -14,10 +14,10 @@
                             </div>
                             <div class="col-md-3 manage-user">
                                 @if (!empty($a['disabled']))
-                                    @if (!$a['disabled'])
-                                        <a class="nav-link enabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-toggle-on"></i> DISABLE</a>
+                                    @if ($a['disabled'])
+                                        <a class="nav-link enabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-toggle-on"></i> ENABLE</a>
                                     @else
-                                        <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> ENABLE</a>
+                                        <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> DISABLE</a>
                                     @endif
                                 @elseif (empty($a['disabled']))
                                     <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> DISABLE</a>
