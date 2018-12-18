@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header">
                     Dashboard
-                    <ul class="nav nav-tabs"  id="myTab" role="tablist">
+                    <ul class="nav nav-tabs pull-left"  id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('dashboard.ads')}}">Ads</a>
                                 {{-- <span class="badge">23</span> --}}

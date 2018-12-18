@@ -4,8 +4,13 @@
         @foreach ($users as $user)
             @if ($user['email'] != 'premadasa.office@gmail.com')
                 <li class="list-group-item">
-                    <a href="{{ route('dashboard.show', ['user' => $user['email']]) }}" class="card-link">
-                        <h4>{{ $user['username'] }}</h4>
+                    <a href="{{ route('dashboard.user.show', ['user' => $user['email']]) }}" class="card-link">
+                        <h4 style="display: inline;">{{ $user['username'] }}</h4>
+                        @if (!empty($user['disabled']))
+                            @if (!$user['disabled'])
+                                &nbsp;<i class="fas fa-ban" style="color: red;"></i>
+                            @endif
+                        @endif
                         <p>{{ $user['email'] }}</p>
                     </a>
 
@@ -19,7 +24,7 @@
                             </a>
                             <a href="#">
                                 <span class="btn delete-item">
-                                    DELETE  <i class="fas fa-trash-alt"></i>
+                                    DELETE <i class="fas fa-trash-alt"></i>
                                 </span>
                             </a>
                             <a href="#">

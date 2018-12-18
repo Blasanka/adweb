@@ -51,15 +51,52 @@ class FirebaseController extends Controller
 
     public function showUser($email)
     {
-        $member = $this->database
-            ->getReference('add-app/users')->orderByChild('email')->equalTo($email)->getSnapshot()->getvalue();
+        $member = $this->database->getReference('add-app/users')->orderByChild('email')
+            ->equalTo($email)->getSnapshot()->getvalue();
+
+        foreach ($member as $key => $val) {
+            $memberKey = $key;
+        }
+        if (!empty($memberKey)) {
+            $memberMetadata = $this->auth->getUser($memberKey);
+
+            foreach ($memberMetadata->metadata as $key => $meta) {
+                $dateTime = new \DateTime();
+                $date = $dateTime->setTimestamp($meta->getTimestamp());
+                $result = $date->format('Y-m-d H:i:s');
+                $dates[$key] = $result;
+            }
+        } else {
+            $memberMetadata = '';
+            $dates['createdAt'] = '';
+            $dates['lastLoginAt'] = '';
+        }
 
         $userAds = $this->database
             ->getReference('add-app/ad')->orderByChild('email')->equalTo($email)->getSnapshot()->getvalue();
-
         // echo '<pre>';
         // print_r($newPost->getvalue());
-        return view('partials.single-user', ['user' => $this->user, 'member' => $member, 'ads' => $userAds]);
+        return view('partials.single-user', ['user' => $this->user, 'member' => $member, 'memberMetadata' => $memberMetadata, 'dates' => $dates, 'ads' => $userAds]);
+    }
+
+    public function disableAd($title)
+    {
+        $ad = $this->database->getReference('add-app/users')->orderByChild('email')
+            ->equalTo($email)->getSnapshot()->getvalue();
+    }
+
+    public function disableUser($memberKey)
+    {
+        $userDb = $this->database->getReference('add-app/users/' . $memberKey);
+        $memberMetadata = $this->auth->getUser($memberKey);
+        if ($memberMetadata->disabled) {
+            $userDb->update(['disabled' => 'false']);
+            $updatedUser = $this->auth->enableUser($memberKey);
+        } else {
+            $userDb->update(['disabled' => 'true']);
+            $updatedUser = $this->auth->disableUser($memberKey);
+        }
+        return redirect()->back();
     }
 
     public function save()

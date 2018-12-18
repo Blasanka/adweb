@@ -42,11 +42,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
     Route::get('ads/{title}', [
         'uses' => 'FirebaseController@showAd',
-        'as' => 'show',
+        'as' => 'ad.show',
     ]);
 
-    Route::get('users/{uid}', [
+    Route::get('users/{email}', [
         'uses' => 'FirebaseController@showUser',
-        'as' => 'show',
+        'as' => 'user.show',
     ]);
+
+    Route::get('/users/userid/{uid}', 'FirebaseController@disableUser')->name('users.userid');
 });

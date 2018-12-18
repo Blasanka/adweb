@@ -52,3 +52,19 @@ a .disable-enable {
 .user-details {
     margin-right: 20px;
 }
+
+.manage-user a {
+    margin: 0;
+    margin-right: 20px;
+    padding: 0;
+    display: inline-block;
+    color: rgb(134, 17, 17);
+}
+
+.manage-user .enabled {
+    color: rgb(7, 124, 7);
+}
+
+.manage-user .disabled {
+    color: rgb(134, 17, 17);
+}

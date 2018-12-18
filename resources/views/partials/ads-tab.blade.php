@@ -3,7 +3,7 @@
     <ul class="list-group">
         @foreach ($ads as $ad)
             <li class="list-group-item">
-                <a href="{{ route('dashboard.show', ['ad' => $ad['title']]) }}" class="card-link">
+                <a href="{{ route('dashboard.ad.show', ['ad' => $ad['title']]) }}" class="card-link">
                     <h4>{{ $ad['title'] }}</h4>
                     <p>{{ $ad['description'] }}</p>
                 </a>
@@ -21,6 +21,7 @@
                                 DELETE  <i class="fas fa-trash-alt"></i>
                             </span>
                         </a>
+                        {{-- {{ route('dashboard.ad.disable', ['ad' => $ad['title']]) }} --}}
                         <a href="#">
                             <span class="btn disable-enable">
                                 DISABLE

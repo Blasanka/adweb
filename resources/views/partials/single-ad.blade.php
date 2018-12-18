@@ -37,7 +37,7 @@
                     </div>
                 @endforeach
                 <div class="card-footer">
-                    <a class="btn btn-light" href="{{ url()->previous() }}">Go Back</a>
+                    <a class="user-detais btn btn-light" href="{{ url()->previous() }}"><i class="fas fa-arrow-left"></i> Go Back</a>
                 </div>
             </div>
         </div>
