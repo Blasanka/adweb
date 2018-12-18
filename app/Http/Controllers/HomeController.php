@@ -7,7 +7,7 @@ use Kreait\Firebase\ServiceAccount;
 
 class HomeController extends Controller
 {
-
+    private $auth;
     private $database;
 
     /**
@@ -25,7 +25,10 @@ class HomeController extends Controller
             ->withDatabaseUri('https://add-app-9ae19.firebaseio.com/')
             ->create();
 
+        $this->auth = $firebase->getAuth();
         $this->database = $firebase->getDatabase();
+
+        $this->user = $this->auth->getUser('p1bQX9UPhCUwDiQESgb4D23QgUF2');
     }
 
     /**
@@ -35,7 +38,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.home');
+        return view('dashboard.home', ['user' => $this->user]);
     }
 
     public function getAds()
@@ -44,7 +47,7 @@ class HomeController extends Controller
             ->getReference('add-app/ad')->getSnapshot()->getvalue();
         // echo '<pre>';
         // print_r($newPost->getvalue());
-        return view('dashboard.ads', ['ads' => $ads]);
+        return view('dashboard.ads', ['ads' => $ads, 'user' => $this->user]);
     }
 
     public function getUsers()
@@ -52,6 +55,6 @@ class HomeController extends Controller
         $users = $this->database
             ->getReference('add-app/users')->getSnapshot()->getvalue();
 
-        return view('dashboard.users', ['users' => $users]);
+        return view('dashboard.users', ['users' => $users, 'user' => $this->user]);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
-Use Redirect;
+use Redirect;
 
 class FirebaseAuthController extends Controller
 {
@@ -16,9 +16,9 @@ class FirebaseAuthController extends Controller
     {
         //TODO: create the middleware
         // $this->middleware('auth')->except('dashboard');
-        
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/add-app-9ae19-3c75e31c2721.json');
-        
+
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/add-app-9ae19-3c75e31c2721.json');
+
         $this->firebase = (new Factory)
             ->withServiceAccount($serviceAccount)
             ->create();
@@ -26,8 +26,8 @@ class FirebaseAuthController extends Controller
         $this->auth = $this->firebase->getAuth();
     }
 
-    public function index() {
-        $this->auth = $this->firebase->getAuth();
+    public function index()
+    {
         $users = $this->auth->listUsers($defaultMaxResults = 1000, $defaultBatchSize = 1000);
         foreach ($users as $user) {
             /** @var \Kreait\Firebase\Auth\UserRecord $user */
@@ -35,24 +35,26 @@ class FirebaseAuthController extends Controller
         }
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
 
         try {
             $user = $this->auth->verifyPassword($request['email'], $request['password']);
-            
+
             if ($user->uid != null) {
-                echo($user->uid);
-                return Redirect::route('dashboard')->with( ['user' => $user->email] );
+                return view('dashboard.home', ['user' => $user]);
             } else {
                 return redirect()->back()->with('msg', 'login failed');
             }
-        } catch (Kreait\Firebase\Exception\Auth\InvalidPassword $e) {
-            echo $e->getMessage();
+        } catch (Kreait\Firebase\Exception\Auth\EmailNotFound $emil) {
+            return back()->withError($emil->getMessage())->withInput();
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
+        $user = $this->auth->getUser('p1bQX9UPhCUwDiQESgb4D23QgUF2');
         // echo($this->auth->getUser());
-        // return Redirect::route('home');
+        return Redirect::route('home');
     }
 }

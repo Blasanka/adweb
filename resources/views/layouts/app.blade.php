@@ -25,7 +25,8 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'AdWeb') }}
+                    {{ __('AdWeb') }}
+                {{-- config('app.name', 'AdWeb') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -35,15 +36,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            {{-- <a class="nav-link" href="{{ route('/') }}">{{ __('AdWeb') }}</a> --}}
+                            {{-- <a class="nav-link" href="{{ route('dashboard') }}">{{ __('AdWeb') }}</a> --}}
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+
+                    @if(empty($user))
+                        <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         {{-- @guest --}}
-                        {{-- @if($user == null) --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -52,12 +54,14 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif --}}
+                    @else
+                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{-- {{ Auth::user()->name }} <span class="caret"></span> --}}
                                     {{-- {{ $user->email }} <span class="caret"></span> --}}
+                                    {{ $user->email }}
                                 </a>
-                        {{-- @else --}}
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('dashboard') }}">
                                          {{ __('Dashboard') }}
@@ -73,8 +77,8 @@
                                     </form>
                                 </div>
                             </li>
-                        {{-- @endif --}}
-                    </ul>
+                        </ul>
+                    @endif
                 </div>
             </div>
         </nav>

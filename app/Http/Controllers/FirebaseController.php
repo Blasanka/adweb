@@ -10,6 +10,7 @@ class FirebaseController extends Controller
     private $serviceAccount;
     private $firebase;
     private $database;
+    private $user;
 
     /**
      * Display a listing of the resource.
@@ -26,6 +27,8 @@ class FirebaseController extends Controller
             ->create();
 
         $this->database = $this->firebase->getDatabase();
+        $this->auth = $this->firebase->getAuth();
+        $this->user = $this->auth->getUser('p1bQX9UPhCUwDiQESgb4D23QgUF2');
     }
 
     public function index()
@@ -43,7 +46,20 @@ class FirebaseController extends Controller
             ->getReference('add-app/ad')->orderByChild('title')->equalTo($title)->getSnapshot()->getvalue();
         // echo '<pre>';
         // print_r($newPost->getvalue());
-        return view('partials.single-ad', ['ad' => $ad]);
+        return view('partials.single-ad', ['user' => $this->user, 'ad' => $ad]);
+    }
+
+    public function showUser($email)
+    {
+        $member = $this->database
+            ->getReference('add-app/users')->orderByChild('email')->equalTo($email)->getSnapshot()->getvalue();
+
+        $userAds = $this->database
+            ->getReference('add-app/ad')->orderByChild('email')->equalTo($email)->getSnapshot()->getvalue();
+
+        // echo '<pre>';
+        // print_r($newPost->getvalue());
+        return view('partials.single-user', ['user' => $this->user, 'member' => $member, 'ads' => $userAds]);
     }
 
     public function save()
