@@ -26,6 +26,7 @@ Route::get('/dashboard', [
     'uses' => 'HomeController@index',
     'as' => 'dashboard',
 ]);
+
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     // Dashboard
     Route::get('/ads', 'HomeController@getAds')->name('ads');
