@@ -8,7 +8,27 @@
             <div class="card">
                 @foreach ($ad as $a)
                     <div class="card-header">
+<<<<<<< HEAD
                         {{ $a['title'] }}
+=======
+                        <div class="row">
+                            <div class="col-md-9">
+                                {{ $a['title'] }}
+                            </div>
+                            <div class="col-md-3 manage-user">
+                                @if (!empty($a['disabled']))
+                                    @if ($a['disabled'])
+                                        <a class="nav-link enabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-toggle-on"></i> ENABLE</a>
+                                    @else
+                                        <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> DISABLE</a>
+                                    @endif
+                                @elseif (empty($a['disabled']))
+                                    <a class="nav-link disabled" href="{{ route('dashboard.ads.title', ['title' => $a['title']]) }}"><i class="fas fa-ban"></i> DISABLE</a>
+                                @endif
+                                <a class="nav-link" href="{{route('dashboard.users')}}"><i class="fas fa-trash-alt"></i> DELETE</a>
+                            </div>
+                        </div>
+>>>>>>> f84831e2a64af15656a8f3797b32d30cf62786f0
                     </div>
                     <div class="row ad-image-row">
                         @foreach ($a['imageUrl'] as $img)
@@ -37,7 +57,11 @@
                     </div>
                 @endforeach
                 <div class="card-footer">
+<<<<<<< HEAD
                     <a class="btn btn-info" href="{{ url()->previous() }}">Go Back</a>
+=======
+                    <a class="user-detais btn btn-light" href="{{ url()->previous() }}"><i class="fas fa-arrow-left"></i> Go Back</a>
+>>>>>>> f84831e2a64af15656a8f3797b32d30cf62786f0
                 </div>
             </div>
         </div>

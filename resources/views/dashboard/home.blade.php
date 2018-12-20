@@ -16,7 +16,7 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -25,8 +25,13 @@
                     @endif
                     @auth
                         {{-- {{ Auth::user()->name }} &#x1F63C; --}}
+<<<<<<< HEAD
                         {{Session::get('user')}}
                     @endauth 
+=======
+                    @endauth
+                    {{ $user->uid }}
+>>>>>>> f84831e2a64af15656a8f3797b32d30cf62786f0
                 </div>
                 <div class="card-footer">Coming soon</div>
             </div>

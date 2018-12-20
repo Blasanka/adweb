@@ -1,7 +1,7 @@
-a:hover,
+/* a:hover,
 a:focus {
-    color: rgb(6, 15, 65);
-}
+    color: rgb(51, 82, 255);
+} */
 
 .card-link {
     color: #222;
@@ -11,17 +11,17 @@ a:focus {
     color: #555;
 }
 
-.edit-item {
+a .edit-item {
     margin-right: 20px;
     color: #060;
 }
 
-.delete-item {
+a .delete-item {
     margin-right: 20px;
     color: #600;
 }
 
-.disable-enable {
+a .disable-enable {
     color: red;
 }
 
@@ -48,3 +48,26 @@ a:focus {
 .ad-image-row {
     padding: 20px;
 }
+<<<<<<< HEAD
+=======
+
+.user-details {
+    margin-right: 20px;
+}
+
+.manage-user a {
+    margin: 0;
+    margin-right: 20px;
+    padding: 0;
+    display: inline-block;
+    color: rgb(134, 17, 17);
+}
+
+.manage-user .enabled {
+    color: rgb(7, 124, 7);
+}
+
+.manage-user .disabled {
+    color: rgb(134, 17, 17);
+}
+>>>>>>> f84831e2a64af15656a8f3797b32d30cf62786f0
